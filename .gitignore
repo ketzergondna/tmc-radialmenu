@@ -1,0 +1,16 @@
+# Never commit ROMs or saves
+*.gba
+*.sav
+*.srm
+*.ss*
+*.state
+# build outputs
+*.o
+*.elf
+*.bin
+src/radial_gfx.h
+src/preview.png
+src/syms.ld
+src/syms.txt
+src/undef.txt
+src/link.ld
