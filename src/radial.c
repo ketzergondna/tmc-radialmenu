@@ -44,6 +44,7 @@ extern void DrawUIElements(void);
 #define MAX_ENTRIES 12
 #define ITEM_SPRITE 0x141  /* sprite index of the item icon frames (EU) */
 #define STABLE_FRAMES 4    /* a direction must be held this long before it moves the cursor */
+#define ICON_DY 5
 #define DIM_LEVEL 9        /* 0..16 background darkening */
 
 /* VRAM borrowed while the menu is open: 9 gfx slots = 144 tiles */
@@ -298,7 +299,7 @@ static void PutObj(s32 x, s32 y, u32 shape, u32 size, u32 tile, u32 pal, u32 fli
 
 static void PutIcon(s32 x, s32 y, u32 i) {
     gOamCmd.x = x;
-    gOamCmd.y = y;
+    gOamCmd.y = y + ICON_DY; /* item frames are anchored 13px above the 16x16 icon's top: re-centre */
     gOamCmd._4 = 0x400;
     gOamCmd._6 = 0;
     gOamCmd._8 = (ItemPalette(R.items[i]) << 12) | (R.tileBase + TILE_ITEMS + i * 8);
