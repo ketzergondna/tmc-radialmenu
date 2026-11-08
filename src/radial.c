@@ -386,8 +386,14 @@ static void UpdateSelection(u32 held) {
         R.dirDone = 0;
         return;
     }
-    if (R.dirDone || ++R.dirFrames < STABLE_FRAMES)
+    R.dirFrames++;
+    if (R.dirFrames < STABLE_FRAMES)
         return;
+    if (R.dirDone) {
+        if (R.dirFrames < STABLE_FRAMES + 14)
+            return; /* hold to keep moving around the ring */
+        R.dirFrames = STABLE_FRAMES + 6;
+    }
     R.dirDone = 1;
 
     if (held & DPAD_LEFT)
@@ -401,24 +407,38 @@ static void UpdateSelection(u32 held) {
     if (!dx && !dy)
         return;
 
-    /* angle of the 8-way direction, same convention as SocketPos */
-    if (dy < 0)
-        a = dx < 0 ? 160 : (dx > 0 ? 224 : 192);
-    else if (dy > 0)
-        a = dx < 0 ? 96 : (dx > 0 ? 32 : 64);
-    else
-        a = dx < 0 ? 128 : 0;
-
-    for (i = 0; i < R.count; i++) {
-        u32 sa = (192 + (256 * i) / R.count) & 255;
-        u32 d = (sa - a) & 255;
-        if (d > 128)
-            d = 256 - d;
-        if (d < bestDiff) {
-            bestDiff = d;
-            best = i;
+    /* spatial navigation: from the selected socket, move to the socket that lies
+       best in the pressed direction. With 8 directions and up to 12 sockets an
+       absolute "point at it" scheme leaves items unreachable; stepping between
+       neighbours reaches all of them. */
+    {
+        s32 sx, sy, bestScore = 0x7FFFFFFF;
+        u32 saveAnim = R.anim;
+        R.anim = OPEN_FRAMES;
+        SocketPos(R.sel, &sx, &sy);
+        for (i = 0; i < R.count; i++) {
+            s32 x, y, vx, vy, dot, cross, score;
+            if (i == R.sel)
+                continue;
+            SocketPos(i, &x, &y);
+            vx = x - sx;
+            vy = y - sy;
+            dot = vx * dx + vy * dy;
+            cross = vx * dy - vy * dx;
+            if (cross < 0)
+                cross = -cross;
+            if (dot <= 0 || cross > dot * 2) /* outside ~63 degrees */
+                continue;
+            score = dot + cross * 2;
+            if (score < bestScore) {
+                bestScore = score;
+                best = i;
+            }
         }
+        R.anim = saveAnim;
     }
+    (void)a;
+    (void)bestDiff;
     SetSel(best);
 }
 

@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/34538371/README.md)
 # The Minish Cap — Radial Item Menu (GBA, EU)
 
 Cambia de ítem sin entrar al menú de pausa. Mantén **L** y aparece un menú radial con todos tus ítems; el juego se congela mientras eliges.
@@ -19,7 +18,7 @@ Descarga el `.bps` desde **[Releases](../../releases)** o desde la carpeta [`pat
 |---|---|
 | **L** (toque) | Fusión de kinestones, igual que siempre |
 | **L** (mantener) | Abre el radial y pausa el juego |
-| **D-pad** | Apunta al ítem |
+| **D-pad** | Mueve el cursor al círculo vecino en esa dirección (mantener = sigue avanzando) |
 | **R** (con L) | Avanza un ítem en sentido del reloj |
 | **Soltar L** | Equipa el ítem en **B** (la espada siempre en **A**). Si no moviste nada, no cambia nada |
 | **B / START** (con L) | Cerrar sin cambios |
@@ -36,7 +35,7 @@ Descarga el `.bps` desde **[Releases](../../releases)** o desde la carpeta [`pat
 | Juego | Legend of Zelda, The - The Minish Cap (Europe) (En,Fr,De,Es,It) — No-Intro |
 | CRC32 | `E8637292` |
 | SHA-1 | `CFF199B36FF173FB6FAF152653D1BCCF87C26FB7` |
-| SHA-1 parchada | `60C1ACB6D9DB6660C2C95230389FD7BF1181248E` |
+| SHA-1 parchada | `E1F9AF9B0B73D281481D63786F17F597E14B7712` |
 
 Aplica el parche con [Rom Patcher JS](https://www.marcrobledo.com/RomPatcher.js/), [Floating IPS](https://www.smwcentral.net/?p=section&a=details&id=11474), o con *soft-patching* en RetroArch/mGBA (mismo nombre de archivo que la ROM). Probado en mGBA (core libretro).
 
@@ -50,7 +49,7 @@ Aplica el parche con [Rom Patcher JS](https://www.marcrobledo.com/RomPatcher.js/
 |---|---|
 | **L** (tap) | Kinstone fusion, as usual |
 | **L** (hold) | Opens the radial menu, game pauses |
-| **D-pad** | Point at an item |
+| **D-pad** | Move to the neighbouring socket in that direction (hold to keep moving) |
 | **R** (with L) | Step one item clockwise |
 | **Release L** | Equip on **B** (sword always stays on **A**). No input = no change |
 | **B / START** (with L) | Close without changes |
@@ -75,6 +74,5 @@ The hack is written in C on top of the symbols of the [zeldaret/tmc](https://git
 
 - **Ketzergon** — concepto, diseño, pruebas
 - **[zeldaret/tmc](https://github.com/zeldaret/tmc)** — decompilación de The Minish Cap
-- **Claude** — código
 
 The Legend of Zelda: The Minish Cap © Nintendo / Capcom. Este proyecto no está afiliado a Nintendo.
