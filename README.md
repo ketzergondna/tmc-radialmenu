@@ -75,5 +75,6 @@ The hack is written in C on top of the symbols of the [zeldaret/tmc](https://git
 
 - **Ketzergon** — concepto, diseño, pruebas
 - **[zeldaret/tmc](https://github.com/zeldaret/tmc)** — decompilación de The Minish Cap
+- **Claude** — código
 
 The Legend of Zelda: The Minish Cap © Nintendo / Capcom. Este proyecto no está afiliado a Nintendo.
